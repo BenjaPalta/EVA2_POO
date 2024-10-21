@@ -2,14 +2,14 @@ import _sqlite3
 import os
 import platform
 
-# Limpiar consola de forma multiplataforma
+
 def clear_console():
     if platform.system() == "Windows":
         os.system("cls")
     else:
         os.system("clear")
 
-# Conexión a la base de datos
+
 class ConexionBD:
     def __init__(self, dbname="ActividadFisica.db"):
         self.dbname = dbname
@@ -46,11 +46,11 @@ class ConexionBD:
             self.conexion.close()
 
 
-# Clase Base
+
 class Actividad:
     def __init__(self, nombre, duracion, caloriasQ):
         self.nombre = nombre
-        self.duracion = duracion  # Minutos
+        self.duracion = duracion 
         self.caloriasQ = caloriasQ
 
     def detalles(self):
@@ -60,13 +60,13 @@ class Actividad:
         return self.detalles()
 
 
-# Clase derivada para la actividad
+
 class EjercicioCardio(Actividad):
     def detalles(self):
         return f"Ejercicio: {self.nombre}, Duración: {self.duracion} minutos, Calorías quemadas: {self.caloriasQ} kcal."
 
 
-# Clase CRUD para actividades
+
 class CRUDActividad:
     def __init__(self):
         self.db = ConexionBD()
@@ -126,7 +126,7 @@ class CRUDActividad:
         self.db.cerrar()
 
 
-# Función reutilizable para obtener entradas del usuario
+
 def obtener_entrada(mensaje, tipo_dato=int, opcional=False):
     while True:
         entrada = input(mensaje)
@@ -138,7 +138,7 @@ def obtener_entrada(mensaje, tipo_dato=int, opcional=False):
             print(f"Por favor, ingresa un valor válido de tipo {tipo_dato.__name__}.")
 
 
-# Funciones para la gestión de actividades
+
 def registrar_actividad(crud):
     nombre = input("Nombre de la actividad: ")
     duracion = obtener_entrada("Duración (minutos): ", int)
@@ -172,7 +172,7 @@ def eliminar_actividad(crud):
     crud.eliminar_actividad(id_actividad)
 
 
-# Definición del menú de trabajo
+
 def menu():
     clear_console()
     crud = CRUDActividad()
